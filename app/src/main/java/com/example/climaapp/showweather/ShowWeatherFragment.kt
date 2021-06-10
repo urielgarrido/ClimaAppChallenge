@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import com.example.climaapp.R
 
 class ShowWeatherFragment : Fragment() {
+    companion object {
+        val CITY_SELECTED = "city_selected"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
