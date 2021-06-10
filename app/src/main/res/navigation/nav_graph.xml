@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/initialFragment">
+
+    <fragment
+        android:id="@+id/initialFragment"
+        android:name="com.example.climaapp.inicio.fragment.InitialFragment"
+        tools:layout="@layout/fragment_initial"
+        android:label="InitialFragment" >
+        <action
+            android:id="@+id/go_to_show_weather"
+            app:destination="@id/showWeatherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showWeatherFragment"
+        android:name="com.example.climaapp.showweather.ShowWeatherFragment"
+        android:label="fragment_show_weather"
+        tools:layout="@layout/fragment_show_weather" />
+</navigation>
