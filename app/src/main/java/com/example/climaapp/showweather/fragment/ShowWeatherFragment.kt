@@ -30,10 +30,24 @@ class ShowWeatherFragment : Fragment() {
         )
     }
 
-    private var showListener: ShowLoadingListener? = null
-
     companion object {
         const val CITY_SELECTED = "city_selected"
+    }
+
+    interface ShowLoadingListener{
+        fun showLoading(show: Boolean)
+    }
+
+    private var showListener: ShowLoadingListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showListener = context as? ShowLoadingListener
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        showListener = null
     }
 
     override fun onCreateView(
@@ -49,19 +63,10 @@ class ShowWeatherFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setOnClickListeners()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        showListener = context as? ShowLoadingListener
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        showListener = null
+    private fun bindViewModel() {
+        showWeatherViewModel.showLoading.observe(viewLifecycleOwner, {
+            showListener?.showLoading(it)
+        })
     }
 
     private fun getDataFromApi() {
@@ -92,19 +97,14 @@ class ShowWeatherFragment : Fragment() {
             .show()
     }
 
-    private fun bindViewModel() {
-        showWeatherViewModel.showLoading.observe(viewLifecycleOwner, {
-            showListener?.showLoading(it)
-        })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
         binding.elegirOtraButton.setOnClickListener {
             findNavController().popBackStack()
         }
-    }
-
-    interface ShowLoadingListener{
-        fun showLoading(show: Boolean)
     }
 }

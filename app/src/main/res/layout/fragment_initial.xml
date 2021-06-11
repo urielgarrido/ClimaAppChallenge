@@ -26,25 +26,25 @@
             android:id="@+id/city_2_radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/punta_del_este_string" />
 
         <RadioButton
             android:id="@+id/city_3_radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/madrid_string" />
 
         <RadioButton
             android:id="@+id/city_4_radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/lisboa_string" />
 
         <RadioButton
             android:id="@+id/city_5_radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/rio_de_janeiro_string" />
     </RadioGroup>
 
     <TextView

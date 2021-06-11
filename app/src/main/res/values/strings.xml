@@ -10,4 +10,8 @@
     <string name="error">Error</string>
     <string name="no_se_logro_obtener_datos">No se logró obtener los datos meteorológicos</string>
     <string name="aceptar">Aceptar</string>
+    <string name="punta_del_este_string">Punta del Este</string>
+    <string name="madrid_string">Madrid</string>
+    <string name="lisboa_string">Lisboa</string>
+    <string name="rio_de_janeiro_string">Rio de Janeiro</string>
 </resources>
