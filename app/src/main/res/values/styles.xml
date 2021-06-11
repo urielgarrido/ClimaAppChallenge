@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="datos_textView">
+        <item name="android:textSize">@dimen/dataTextViewSize</item>
+        <item name="android:layout_marginStart">10dp</item>
+    </style>
+
+    <style name="data_horizontal_linear_layout">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">14dp</item>
+    </style>
+</resources>

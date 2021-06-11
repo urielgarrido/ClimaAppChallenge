@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">ClimaApp</string>
     <string name="apiKey">24721acb7c7834a32a5f14bbd854c492</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_city_string">Selecciona una ciudad</string>
     <string name="confirmar_string">Confirmar</string>
     <string name="buenos_aires_city_string">Buenos Aires</string>
-    <string name="seleccionar_otra_city">Elegir otra</string>
+    <string name="seleccionar_otra_city">Elegir otra ciudad</string>
     <string name="error">Error</string>
     <string name="no_se_logro_obtener_datos">No se logró obtener los datos meteorológicos</string>
     <string name="aceptar">Aceptar</string>
@@ -14,4 +13,10 @@
     <string name="madrid_string">Madrid</string>
     <string name="lisboa_string">Lisboa</string>
     <string name="rio_de_janeiro_string">Rio de Janeiro</string>
+    <string name="temp_string">Temperatura:</string>
+    <string name="feels_like_string">"Se siente como de: "</string>
+    <string name="temp_min_string">Temperatura mínima:</string>
+    <string name="temp_max_string">Temperatura máxima:</string>
+    <string name="presion_string">Presión:</string>
+    <string name="humedad_string">Humedad:</string>
 </resources>

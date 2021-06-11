@@ -45,53 +45,124 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/city_selected_textView">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:id="@+id/temp_textView"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:text="@{Double.toString(weatherResponse.main.temp)}"
-                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                style="@style/data_horizontal_linear_layout"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:id="@+id/feelsLike_textView"
-                android:text="@{Double.toString(weatherResponse.main.feelsLike)}"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/temp_string"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:id="@+id/tempMin_textView"
-                android:text="@{Double.toString(weatherResponse.main.tempMin)}"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/temp_textView"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:text="@{Double.toString(weatherResponse.main.temp)}" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:id="@+id/tempMax_textView"
-                android:text="@{Double.toString(weatherResponse.main.tempMax)}"
-                android:textSize="16sp" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:id="@+id/pressure_textView"
-                android:text="@{Double.toString(weatherResponse.main.pressure)}"
-                android:textSize="16sp" />
+                style="@style/data_horizontal_linear_layout">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/feels_like_string"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/feelsLike_textView"
+                    android:text="@{Double.toString(weatherResponse.main.feelsLike)}"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:id="@+id/humidity_textView"
-                android:text="@{Double.toString(weatherResponse.main.humidity)}"
-                android:textSize="16sp" />
+                style="@style/data_horizontal_linear_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/temp_min_string"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/tempMin_textView"
+                    android:text="@{Double.toString(weatherResponse.main.tempMin)}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/data_horizontal_linear_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/temp_max_string"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/tempMax_textView"
+                    android:text="@{Double.toString(weatherResponse.main.tempMax)}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/data_horizontal_linear_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/presion_string"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/pressure_textView"
+                    android:text="@{Double.toString(weatherResponse.main.pressure)}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/data_horizontal_linear_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/humedad_string"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/humidity_textView"
+                    android:text="@{Double.toString(weatherResponse.main.humidity)}" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <Button
