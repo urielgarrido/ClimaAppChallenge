@@ -18,4 +18,7 @@
     <string name="temp_max_string">Temperatura máxima:</string>
     <string name="presion_string">Presión:</string>
     <string name="humedad_string">Humedad:</string>
+    <string name="celsius_string">ºC</string>
+    <string name="hPa_string">hPa</string>
+    <string name="porciento_string">%</string>
 </resources>

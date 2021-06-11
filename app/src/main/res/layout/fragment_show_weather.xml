@@ -63,6 +63,13 @@
                     style="@style/datos_textView"
                     android:text="@{Double.toString(weatherResponse.main.temp)}" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:text="@string/celsius_string"
+                    android:textSize="@dimen/dataTextViewSize"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -83,6 +90,13 @@
                     android:id="@+id/tempMin_textView"
                     android:text="@{Double.toString(weatherResponse.main.tempMin)}" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:text="@string/celsius_string"
+                    android:textSize="@dimen/dataTextViewSize"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -102,6 +116,14 @@
                     style="@style/datos_textView"
                     android:id="@+id/tempMax_textView"
                     android:text="@{Double.toString(weatherResponse.main.tempMax)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:text="@string/celsius_string"
+                    android:textSize="@dimen/dataTextViewSize"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -121,6 +143,14 @@
                     style="@style/datos_textView"
                     android:id="@+id/pressure_textView"
                     android:text="@{Double.toString(weatherResponse.main.pressure)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hPa_string"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:textSize="@dimen/dataTextViewSize"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -140,6 +170,13 @@
                     style="@style/datos_textView"
                     android:id="@+id/humidity_textView"
                     android:text="@{Double.toString(weatherResponse.main.humidity)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:text="@string/porciento_string"
+                    android:textSize="@dimen/dataTextViewSize"/>
 
             </LinearLayout>
 
