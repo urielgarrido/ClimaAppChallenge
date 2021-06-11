@@ -6,4 +6,8 @@
     <string name="select_city_string">Selecciona una ciudad</string>
     <string name="confirmar_string">Confirmar</string>
     <string name="buenos_aires_city_string">Buenos Aires</string>
+    <string name="seleccionar_otra_city">Elegir otra</string>
+    <string name="error">Error</string>
+    <string name="no_se_logro_obtener_datos">No se logró obtener los datos meteorológicos</string>
+    <string name="aceptar">Aceptar</string>
 </resources>

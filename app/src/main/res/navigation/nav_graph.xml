@@ -16,7 +16,11 @@
     </fragment>
     <fragment
         android:id="@+id/showWeatherFragment"
-        android:name="com.example.climaapp.showweather.ShowWeatherFragment"
+        android:name="com.example.climaapp.showweather.fragment.ShowWeatherFragment"
         android:label="fragment_show_weather"
-        tools:layout="@layout/fragment_show_weather" />
+        tools:layout="@layout/fragment_show_weather" >
+        <argument
+            android:name="citySelected"
+            app:argType="string" />
+    </fragment>
 </navigation>
