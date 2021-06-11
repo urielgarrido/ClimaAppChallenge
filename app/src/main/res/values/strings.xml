@@ -14,7 +14,6 @@
     <string name="lisboa_string">Lisboa</string>
     <string name="rio_de_janeiro_string">Rio de Janeiro</string>
     <string name="temp_string">Temperatura:</string>
-    <string name="feels_like_string">"Se siente como de: "</string>
     <string name="temp_min_string">Temperatura mínima:</string>
     <string name="temp_max_string">Temperatura máxima:</string>
     <string name="presion_string">Presión:</string>

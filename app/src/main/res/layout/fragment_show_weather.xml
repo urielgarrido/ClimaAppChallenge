@@ -74,26 +74,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/dataTextViewSize"
-                    android:text="@string/feels_like_string"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/datos_textView"
-                    android:id="@+id/feelsLike_textView"
-                    android:text="@{Double.toString(weatherResponse.main.feelsLike)}"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/data_horizontal_linear_layout">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dataTextViewSize"
                     android:text="@string/temp_min_string"/>
 
                 <TextView
