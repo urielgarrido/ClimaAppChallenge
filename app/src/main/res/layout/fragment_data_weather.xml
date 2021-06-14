@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.example.climaapp.showweather.model.WeatherCityResponse" />
+
+        <variable
+            name="weatherResponse"
+            type="WeatherCityResponse" />
+
+        <variable
+            name="date"
+            type="String" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            tools:context=".showweather.fragment.DataWeatherFragment">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_textView"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="14dp"
+                android:textSize="18sp"
+                android:textStyle="italic|bold"
+                android:text="@{date}"
+                tools:text="@string/lisboa_string"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                style="@style/data_horizontal_linear_layout"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/temp_string" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/temp_textView"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:text="@{Double.toString(weatherResponse.main.temp)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:text="@string/celsius_string"
+                    android:textSize="@dimen/dataTextViewSize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/data_horizontal_linear_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/temp_min_string" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/tempMin_textView"
+                    android:text="@{Double.toString(weatherResponse.main.tempMin)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:text="@string/celsius_string"
+                    android:textSize="@dimen/dataTextViewSize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/data_horizontal_linear_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/temp_max_string" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/tempMax_textView"
+                    android:text="@{Double.toString(weatherResponse.main.tempMax)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:text="@string/celsius_string"
+                    android:textSize="@dimen/dataTextViewSize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/data_horizontal_linear_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/presion_string" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/pressure_textView"
+                    android:text="@{Double.toString(weatherResponse.main.pressure)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hPa_string"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:textSize="@dimen/dataTextViewSize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/data_horizontal_linear_layout"
+                android:layout_marginBottom="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dataTextViewSize"
+                    android:text="@string/humedad_string" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/datos_textView"
+                    android:id="@+id/humidity_textView"
+                    android:text="@{Double.toString(weatherResponse.main.humidity)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartUnidad"
+                    android:text="@string/porciento_string"
+                    android:textSize="@dimen/dataTextViewSize" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

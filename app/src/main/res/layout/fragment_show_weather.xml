@@ -7,17 +7,15 @@
         <variable
             name="citySelected"
             type="String" />
-
-        <import type="com.example.climaapp.showweather.model.WeatherCityResponse" />
-        <variable
-            name="weatherResponse"
-            type="WeatherCityResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/screen_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".showweather.fragment.ShowWeatherFragment">
+        android:visibility="invisible"
+        tools:context=".showweather.fragment.ShowWeatherFragment"
+        tools:visibility="visible">
 
 
         <TextView
@@ -32,164 +30,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/data_weather_viewPager"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/city_selected_textView">
+            app:layout_constraintTop_toBottomOf="@id/city_selected_textView" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                style="@style/data_horizontal_linear_layout"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dataTextViewSize"
-                    android:text="@string/temp_string"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/temp_textView"
-                    android:layout_height="wrap_content"
-                    style="@style/datos_textView"
-                    android:text="@{Double.toString(weatherResponse.main.temp)}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/marginStartUnidad"
-                    android:text="@string/celsius_string"
-                    android:textSize="@dimen/dataTextViewSize"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/data_horizontal_linear_layout">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dataTextViewSize"
-                    android:text="@string/temp_min_string"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/datos_textView"
-                    android:id="@+id/tempMin_textView"
-                    android:text="@{Double.toString(weatherResponse.main.tempMin)}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/marginStartUnidad"
-                    android:text="@string/celsius_string"
-                    android:textSize="@dimen/dataTextViewSize"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/data_horizontal_linear_layout">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dataTextViewSize"
-                    android:text="@string/temp_max_string"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/datos_textView"
-                    android:id="@+id/tempMax_textView"
-                    android:text="@{Double.toString(weatherResponse.main.tempMax)}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/marginStartUnidad"
-                    android:text="@string/celsius_string"
-                    android:textSize="@dimen/dataTextViewSize"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/data_horizontal_linear_layout">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dataTextViewSize"
-                    android:text="@string/presion_string"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/datos_textView"
-                    android:id="@+id/pressure_textView"
-                    android:text="@{Double.toString(weatherResponse.main.pressure)}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hPa_string"
-                    android:layout_marginStart="@dimen/marginStartUnidad"
-                    android:textSize="@dimen/dataTextViewSize"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/data_horizontal_linear_layout">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dataTextViewSize"
-                    android:text="@string/humedad_string"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/datos_textView"
-                    android:id="@+id/humidity_textView"
-                    android:text="@{Double.toString(weatherResponse.main.humidity)}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/marginStartUnidad"
-                    android:text="@string/porciento_string"
-                    android:textSize="@dimen/dataTextViewSize"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
 
         <Button
             android:id="@+id/elegir_otra_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
             android:text="@string/seleccionar_otra_city"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

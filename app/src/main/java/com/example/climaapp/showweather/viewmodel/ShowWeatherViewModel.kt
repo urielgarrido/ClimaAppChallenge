@@ -3,6 +3,7 @@ package com.example.climaapp.showweather.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.climaapp.showweather.model.WeatherCityForFiveDaysResponse
 import com.example.climaapp.showweather.model.WeatherCityResponse
 import com.example.climaapp.showweather.repository.ShowWeatherRepository
 
@@ -17,9 +18,16 @@ class ShowWeatherViewModel(
         _showLoading.postValue(show)
     }
 
-    suspend fun getWeatherFromApi(cityName: String, apiKey: String): WeatherCityResponse? {
+    suspend fun getWeatherForToday(cityName: String, apiKey: String): WeatherCityResponse?{
         load(true)
-        return showWeatherRepository.getWeatherApi(cityName, apiKey).also {
+        return showWeatherRepository.getWeatherForToday(cityName, apiKey).also {
+            load(false)
+        }
+    }
+
+    suspend fun getWeatherForFiveDays(cityName: String, apiKey: String): WeatherCityForFiveDaysResponse? {
+        load(true)
+        return showWeatherRepository.getWeatherForFiveDays(cityName, apiKey).also {
             load(false)
         }
     }

@@ -12,6 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.climaapp.R
 import com.example.climaapp.databinding.FragmentShowWeatherBinding
+import com.example.climaapp.showweather.adapter.DataWeatherPagerAdapter
+import com.example.climaapp.showweather.model.WeatherCityForFiveDaysResponse
+import com.example.climaapp.showweather.model.WeatherCityResponse
 import com.example.climaapp.showweather.repository.ShowWeatherRepositoryImpl
 import com.example.climaapp.showweather.viewmodel.ShowWeatherViewModel
 import com.example.climaapp.showweather.viewmodel.ShowWeatherViewModelFactory
@@ -23,6 +26,9 @@ import java.lang.Exception
 class ShowWeatherFragment : Fragment() {
     private var _binding: FragmentShowWeatherBinding? = null
     private val binding get() = _binding!!
+
+    private var weatherDataForFiveDays: WeatherCityForFiveDaysResponse? = null
+    private var weatherDataForToday: WeatherCityResponse? = null
 
     private val showWeatherViewModel: ShowWeatherViewModel by viewModels {
         ShowWeatherViewModelFactory(
@@ -74,14 +80,38 @@ class ShowWeatherFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val citySelected = binding.citySelected
-                val weatherCity = showWeatherViewModel.getWeatherFromApi(citySelected!!, apiKey)
-                binding.weatherResponse = weatherCity
+                weatherDataForToday = showWeatherViewModel.getWeatherForToday(citySelected!!, apiKey)
+                weatherDataForFiveDays = showWeatherViewModel.getWeatherForFiveDays(citySelected, apiKey)
+                requireActivity().runOnUiThread {
+                    setupAdapterToViewPager()
+                    binding.screenConstraintLayout.visibility = View.VISIBLE
+                }
             }catch (exception: Exception){
                 requireActivity().runOnUiThread {
+                    binding.screenConstraintLayout.visibility = View.VISIBLE
                     showInternetErrorDialog()
                 }
             }
         }
+    }
+
+    private fun setupAdapterToViewPager() {
+        val adapter = DataWeatherPagerAdapter(
+            createDataWeatherFragments(),
+            requireActivity().supportFragmentManager,
+            lifecycle
+        )
+        binding.dataWeatherViewPager.adapter = adapter
+    }
+
+    private fun createDataWeatherFragments(): List<DataWeatherFragment> {
+        val weatherListFiltered = weatherDataForFiveDays?.list?.filter {
+            it.dtText?.contains("00:00:00") ?: false
+        }?.toMutableList()
+        weatherListFiltered?.add(0, weatherDataForToday!!)
+        return weatherListFiltered?.map {
+            DataWeatherFragment.newInstance(it)
+        }!!
     }
 
     private fun showInternetErrorDialog() {
