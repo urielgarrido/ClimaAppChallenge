@@ -85,6 +85,8 @@ class ShowWeatherFragment : Fragment() {
                     weatherCityResponse.dtText?.contains(showWeatherViewModel.getActualHours())
                         ?: false
                 })
+            }.also {
+                setupAdapterToViewPager()
             }
         })
     }
@@ -96,7 +98,6 @@ class ShowWeatherFragment : Fragment() {
                 val citySelected = binding.citySelected
                 showWeatherViewModel.getDataWeather(citySelected!!, apiKey)
                 requireActivity().runOnUiThread {
-                    setupAdapterToViewPager()
                     binding.screenConstraintLayout.visibility = View.VISIBLE
                 }
             } catch (exception: Exception) {

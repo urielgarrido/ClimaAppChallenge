@@ -54,7 +54,7 @@ class ShowWeatherViewModel(
 
     fun getActualHours(): String {
         val actualDate = Date()
-        val formatDateToHours = SimpleDateFormat("hh", Locale.getDefault())
+        val formatDateToHours = SimpleDateFormat("HH", Locale.getDefault())
         val actualHoursString = formatDateToHours.format(actualDate)
 
         return when (actualHoursString.toInt() % 3) {
@@ -62,7 +62,8 @@ class ShowWeatherViewModel(
                 actualHoursString
             }
             1 -> {
-                actualHoursString
+                val beforeAvailableHourToShowData = actualHoursString.toInt() - 1
+                beforeAvailableHourToShowData.toString()
             }
             2 -> {
                 val nextAvailableHourToShowData = actualHoursString.toInt() + 1
