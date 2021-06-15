@@ -18,17 +18,29 @@ class ShowWeatherViewModel(
         _showLoading.postValue(show)
     }
 
-    suspend fun getWeatherForToday(cityName: String, apiKey: String): WeatherCityResponse?{
+    private val _weatherDataForToday = MutableLiveData<WeatherCityResponse?>(null)
+    val weatherDataForToday get() = _weatherDataForToday
+
+    private suspend fun getWeatherForToday(cityName: String, apiKey: String){
         load(true)
-        return showWeatherRepository.getWeatherForToday(cityName, apiKey).also {
+        _weatherDataForToday.postValue(showWeatherRepository.getWeatherForToday(cityName, apiKey)).also {
             load(false)
         }
     }
 
-    suspend fun getWeatherForFiveDays(cityName: String, apiKey: String): WeatherCityForFiveDaysResponse? {
+    private val _weatherDataForFiveDays = MutableLiveData<WeatherCityForFiveDaysResponse?>(null)
+    val weatherDataForFiveDays get() = _weatherDataForFiveDays
+
+    private suspend fun getWeatherForFiveDays(cityName: String, apiKey: String) {
         load(true)
-        return showWeatherRepository.getWeatherForFiveDays(cityName, apiKey).also {
+        _weatherDataForFiveDays.postValue(showWeatherRepository.getWeatherForFiveDays(cityName, apiKey)).also {
             load(false)
+        }
+    }
+
+    suspend fun getDataWeather(citySelected: String, apiKey: String) {
+        getWeatherForToday(citySelected, apiKey).also {
+            getWeatherForFiveDays(citySelected, apiKey)
         }
     }
 }

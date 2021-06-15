@@ -27,8 +27,7 @@ class ShowWeatherFragment : Fragment() {
     private var _binding: FragmentShowWeatherBinding? = null
     private val binding get() = _binding!!
 
-    private var weatherDataForFiveDays: WeatherCityForFiveDaysResponse? = null
-    private var weatherDataForToday: WeatherCityResponse? = null
+    private val weatherListFiltered: MutableList<WeatherCityResponse> = emptyList<WeatherCityResponse>().toMutableList()
 
     private val showWeatherViewModel: ShowWeatherViewModel by viewModels {
         ShowWeatherViewModelFactory(
@@ -73,6 +72,20 @@ class ShowWeatherFragment : Fragment() {
         showWeatherViewModel.showLoading.observe(viewLifecycleOwner, {
             showListener?.showLoading(it)
         })
+
+        showWeatherViewModel.weatherDataForToday.observe(viewLifecycleOwner, {
+            it?.let {
+                weatherListFiltered.add(0, it)
+            }
+        })
+
+        showWeatherViewModel.weatherDataForFiveDays.observe(viewLifecycleOwner, {
+           it?.let {
+               weatherListFiltered.addAll(it.list.filter { weatherCityResponse ->
+                   weatherCityResponse.dtText?.contains("00:00:00") ?: false
+               })
+           }
+        })
     }
 
     private fun getDataFromApi() {
@@ -80,8 +93,7 @@ class ShowWeatherFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val citySelected = binding.citySelected
-                weatherDataForToday = showWeatherViewModel.getWeatherForToday(citySelected!!, apiKey)
-                weatherDataForFiveDays = showWeatherViewModel.getWeatherForFiveDays(citySelected, apiKey)
+                showWeatherViewModel.getDataWeather(citySelected!!, apiKey)
                 requireActivity().runOnUiThread {
                     setupAdapterToViewPager()
                     binding.screenConstraintLayout.visibility = View.VISIBLE
@@ -105,13 +117,9 @@ class ShowWeatherFragment : Fragment() {
     }
 
     private fun createDataWeatherFragments(): List<DataWeatherFragment> {
-        val weatherListFiltered = weatherDataForFiveDays?.list?.filter {
-            it.dtText?.contains("00:00:00") ?: false
-        }?.toMutableList()
-        weatherListFiltered?.add(0, weatherDataForToday!!)
-        return weatherListFiltered?.map {
+        return weatherListFiltered.map {
             DataWeatherFragment.newInstance(it)
-        }!!
+        }
     }
 
     private fun showInternetErrorDialog() {
