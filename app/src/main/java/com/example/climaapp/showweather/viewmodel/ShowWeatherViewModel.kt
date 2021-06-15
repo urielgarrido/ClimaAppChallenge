@@ -6,26 +6,29 @@ import androidx.lifecycle.ViewModel
 import com.example.climaapp.showweather.model.WeatherCityForFiveDaysResponse
 import com.example.climaapp.showweather.model.WeatherCityResponse
 import com.example.climaapp.showweather.repository.ShowWeatherRepository
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ShowWeatherViewModel(
     private val showWeatherRepository: ShowWeatherRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _showLoading = MutableLiveData(false)
     val showLoading: LiveData<Boolean> get() = _showLoading
 
-    private fun load(show: Boolean){
+    private fun load(show: Boolean) {
         _showLoading.postValue(show)
     }
 
     private val _weatherDataForToday = MutableLiveData<WeatherCityResponse?>(null)
     val weatherDataForToday get() = _weatherDataForToday
 
-    private suspend fun getWeatherForToday(cityName: String, apiKey: String){
+    private suspend fun getWeatherForToday(cityName: String, apiKey: String) {
         load(true)
-        _weatherDataForToday.postValue(showWeatherRepository.getWeatherForToday(cityName, apiKey)).also {
-            load(false)
-        }
+        _weatherDataForToday.postValue(showWeatherRepository.getWeatherForToday(cityName, apiKey))
+            .also {
+                load(false)
+            }
     }
 
     private val _weatherDataForFiveDays = MutableLiveData<WeatherCityForFiveDaysResponse?>(null)
@@ -33,7 +36,12 @@ class ShowWeatherViewModel(
 
     private suspend fun getWeatherForFiveDays(cityName: String, apiKey: String) {
         load(true)
-        _weatherDataForFiveDays.postValue(showWeatherRepository.getWeatherForFiveDays(cityName, apiKey)).also {
+        _weatherDataForFiveDays.postValue(
+            showWeatherRepository.getWeatherForFiveDays(
+                cityName,
+                apiKey
+            )
+        ).also {
             load(false)
         }
     }
@@ -41,6 +49,26 @@ class ShowWeatherViewModel(
     suspend fun getDataWeather(citySelected: String, apiKey: String) {
         getWeatherForToday(citySelected, apiKey).also {
             getWeatherForFiveDays(citySelected, apiKey)
+        }
+    }
+
+    fun getActualHours(): String {
+        val actualDate = Date()
+        val formatDateToHours = SimpleDateFormat("hh", Locale.getDefault())
+        val actualHoursString = formatDateToHours.format(actualDate)
+
+        return when (actualHoursString.toInt() % 3) {
+            0 -> {
+                actualHoursString
+            }
+            1 -> {
+                actualHoursString
+            }
+            2 -> {
+                val nextAvailableHourToShowData = actualHoursString.toInt() + 1
+                nextAvailableHourToShowData.toString()
+            }
+            else -> "00"
         }
     }
 }

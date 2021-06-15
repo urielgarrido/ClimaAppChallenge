@@ -3,11 +3,11 @@ package com.example.climaapp.showweather.fragment
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.climaapp.R
@@ -20,15 +20,13 @@ import com.example.climaapp.showweather.viewmodel.ShowWeatherViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ShowWeatherFragment : Fragment() {
     private var _binding: FragmentShowWeatherBinding? = null
     private val binding get() = _binding!!
 
-    private val weatherListFiltered: MutableList<WeatherCityResponse> = emptyList<WeatherCityResponse>().toMutableList()
+    private val weatherListFiltered: MutableList<WeatherCityResponse> =
+        emptyList<WeatherCityResponse>().toMutableList()
 
     private val showWeatherViewModel: ShowWeatherViewModel by viewModels {
         ShowWeatherViewModelFactory(
@@ -40,7 +38,7 @@ class ShowWeatherFragment : Fragment() {
         const val CITY_SELECTED = "city_selected"
     }
 
-    interface ShowLoadingListener{
+    interface ShowLoadingListener {
         fun showLoading(show: Boolean)
     }
 
@@ -60,7 +58,8 @@ class ShowWeatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater,R.layout.fragment_show_weather,container,false)
+        _binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_show_weather, container, false)
         arguments?.let {
             binding.citySelected = it.getString(CITY_SELECTED)
         }
@@ -81,32 +80,13 @@ class ShowWeatherFragment : Fragment() {
         })
 
         showWeatherViewModel.weatherDataForFiveDays.observe(viewLifecycleOwner, {
-           it?.let {
-               weatherListFiltered.addAll(it.list.filter { weatherCityResponse ->
-                   weatherCityResponse.dtText?.contains(getActualHours()) ?: false
-               })
-           }
+            it?.let {
+                weatherListFiltered.addAll(it.list.filter { weatherCityResponse ->
+                    weatherCityResponse.dtText?.contains(showWeatherViewModel.getActualHours())
+                        ?: false
+                })
+            }
         })
-    }
-
-    private fun getActualHours(): String{
-        val actualDate = Date()
-        val formatDateToHours = SimpleDateFormat("hh", Locale.getDefault())
-        val actualHoursString = formatDateToHours.format(actualDate)
-
-        return when(actualHoursString.toInt() % 3){
-            0 -> {
-               actualHoursString
-            }
-            1 -> {
-                actualHoursString
-            }
-            2 -> {
-                val nextAvailableHourToShowData = actualHoursString.toInt() + 1
-                nextAvailableHourToShowData.toString()
-            }
-            else -> ""
-        }
     }
 
     private fun getDataFromApi() {
@@ -119,7 +99,7 @@ class ShowWeatherFragment : Fragment() {
                     setupAdapterToViewPager()
                     binding.screenConstraintLayout.visibility = View.VISIBLE
                 }
-            }catch (exception: Exception){
+            } catch (exception: Exception) {
                 requireActivity().runOnUiThread {
                     binding.screenConstraintLayout.visibility = View.VISIBLE
                     showInternetErrorDialog()
