@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.climaapp.R
 import com.example.climaapp.databinding.FragmentShowWeatherBinding
 import com.example.climaapp.showweather.adapter.DataWeatherPagerAdapter
-import com.example.climaapp.showweather.model.WeatherCityForFiveDaysResponse
 import com.example.climaapp.showweather.model.WeatherCityResponse
 import com.example.climaapp.showweather.repository.ShowWeatherRepositoryImpl
 import com.example.climaapp.showweather.viewmodel.ShowWeatherViewModel
@@ -22,6 +21,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ShowWeatherFragment : Fragment() {
     private var _binding: FragmentShowWeatherBinding? = null
@@ -82,10 +83,30 @@ class ShowWeatherFragment : Fragment() {
         showWeatherViewModel.weatherDataForFiveDays.observe(viewLifecycleOwner, {
            it?.let {
                weatherListFiltered.addAll(it.list.filter { weatherCityResponse ->
-                   weatherCityResponse.dtText?.contains("00:00:00") ?: false
+                   weatherCityResponse.dtText?.contains(getActualHours()) ?: false
                })
            }
         })
+    }
+
+    private fun getActualHours(): String{
+        val actualDate = Date()
+        val formatDateToHours = SimpleDateFormat("hh", Locale.getDefault())
+        val actualHoursString = formatDateToHours.format(actualDate)
+
+        return when(actualHoursString.toInt() % 3){
+            0 -> {
+               actualHoursString
+            }
+            1 -> {
+                actualHoursString
+            }
+            2 -> {
+                val nextAvailableHourToShowData = actualHoursString.toInt() + 1
+                nextAvailableHourToShowData.toString()
+            }
+            else -> ""
+        }
     }
 
     private fun getDataFromApi() {

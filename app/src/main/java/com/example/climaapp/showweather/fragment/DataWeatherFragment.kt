@@ -60,10 +60,10 @@ class DataWeatherFragment : Fragment() {
         if (weatherCityResponse?.dtText != null){
             val stringDateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             val dateString = stringDateFormatter.parse(weatherCityResponse?.dtText!!)
-            val dateFormat = SimpleDateFormat("EEEE, d MMMM", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("EEEE, d MMMM HH a", Locale.getDefault())
             binding.date = dateFormat.format(dateString!!)
         } else {
-            val dateFormat = SimpleDateFormat("EEEE, d MMMM", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("EEEE, d MMMM HH a", Locale.getDefault())
             binding.date = dateFormat.format(Date())
         }
     }
