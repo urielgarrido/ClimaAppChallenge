@@ -3,9 +3,11 @@ package com.example.climaapp.showweather.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.climaapp.showweather.model.WeatherCityForFiveDaysResponse
 import com.example.climaapp.showweather.model.WeatherCityResponse
 import com.example.climaapp.showweather.repository.ShowWeatherRepository
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -46,9 +48,11 @@ class ShowWeatherViewModel(
         }
     }
 
-    suspend fun getDataWeather(citySelected: String, apiKey: String) {
-        getWeatherForToday(citySelected, apiKey).also {
-            getWeatherForFiveDays(citySelected, apiKey)
+    fun getDataWeather(citySelected: String, apiKey: String) {
+        viewModelScope.launch {
+            getWeatherForToday(citySelected, apiKey).also {
+                getWeatherForFiveDays(citySelected, apiKey)
+            }
         }
     }
 

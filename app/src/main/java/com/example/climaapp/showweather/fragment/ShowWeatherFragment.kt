@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.climaapp.R
 import com.example.climaapp.databinding.FragmentShowWeatherBinding
@@ -17,8 +18,7 @@ import com.example.climaapp.showweather.model.WeatherCityResponse
 import com.example.climaapp.showweather.repository.ShowWeatherRepositoryImpl
 import com.example.climaapp.showweather.viewmodel.ShowWeatherViewModel
 import com.example.climaapp.showweather.viewmodel.ShowWeatherViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
 
 class ShowWeatherFragment : Fragment() {
@@ -93,19 +93,13 @@ class ShowWeatherFragment : Fragment() {
 
     private fun getDataFromApi() {
         val apiKey: String = resources.getString(R.string.apiKey)
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val citySelected = binding.citySelected
-                showWeatherViewModel.getDataWeather(citySelected!!, apiKey)
-                requireActivity().runOnUiThread {
-                    binding.screenConstraintLayout.visibility = View.VISIBLE
-                }
-            } catch (exception: Exception) {
-                requireActivity().runOnUiThread {
-                    binding.screenConstraintLayout.visibility = View.VISIBLE
-                    showInternetErrorDialog()
-                }
-            }
+        try {
+            val citySelected = binding.citySelected
+            showWeatherViewModel.getDataWeather(citySelected!!, apiKey)
+            binding.screenConstraintLayout.visibility = View.VISIBLE
+        } catch (exception: Exception) {
+            binding.screenConstraintLayout.visibility = View.VISIBLE
+            showInternetErrorDialog()
         }
     }
 
